@@ -10,7 +10,8 @@ module.exports = {
       },
       fontFamily: {
         'signup': ['Inria Sans', 'sans-serif'],
-        'login-sub': ['Imprima', 'sans-serif']
+        'login-sub': ['Imprima', 'sans-serif'],
+        'roboto': ['Roboto', 'sans-serif']
       }
     },
   },
