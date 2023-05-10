@@ -1,9 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
 import Header from "../../components/Header";
 import Menu from "../../components/SideMenu";
 
-export default class Event extends Component{
-  render() {
+function Event(){
     return (
       <div className="w-full min-h-screen bg-[#F8F8F8] overflow-hidden">
         <Header />
@@ -15,4 +14,5 @@ export default class Event extends Component{
       </div>
     );
   }
-}
+
+  export default Event;
