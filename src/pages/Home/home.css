@@ -1,0 +1,11 @@
+.scrollSection::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollSection{
+    scrollbar-width: none;
+}
+
+.scrollSection::-webkit-scrollbar {
+  width: 0 !important;
+}

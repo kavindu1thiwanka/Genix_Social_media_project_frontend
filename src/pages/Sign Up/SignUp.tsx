@@ -11,8 +11,8 @@ import LockRoundedIcon from "@mui/icons-material/LockRounded";
 
 function SignUp() {
   return (
-    <div className="bg-white w-full max-h-screen flex items-center justify-center py-4">
-      <div className="w-[30%] flex items-center justify-center flex-col text-center px-12 py-10">
+    <div className="bg-white w-full min-h-screen flex items-center justify-center pb-4">
+      <div className="w-[30%] h-full flex items-center justify-center flex-col text-center px-12 py-10">
         <img src={logo} alt="logo" className="w-[20%] mb-4" />
         <label className="font-signup text-6xl font-extrabold mb-6">
           Sign Up

@@ -10,7 +10,7 @@ export default class Login extends Component {
   render() {
     return (
       <div className="w-full min-h-screen bg-[#6B43C7] flex justify-center items-center">
-        <div className="Login-board bg-white rounded-[40px] px-8 py-20 w-[60%] shadow-xl grid grid-cols-2 items-center">
+        <div className="Login-board bg-white rounded-[40px] px-8 py-14 w-[65%] shadow-xl grid grid-cols-2 items-center">
           <div className="m-8">
             <img src={logo} alt="logo" className="w-auto" />
           </div>

@@ -6,7 +6,7 @@ function Event(){
     return (
       <div className="w-full min-h-screen bg-[#F8F8F8] overflow-hidden">
         <Header />
-        <div className="w-full flex flex-col">
+        <div className="w-full flex flex-row">
          <Menu/>
           {/* Content Display Div */}
           <div className="w-5/6 pt-20">Event</div>
