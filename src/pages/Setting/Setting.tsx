@@ -10,7 +10,9 @@ export default class Setting extends Component{
         <div className="w-full flex flex-row">
          <Menu/>
           {/* Content Display Div */}
-          <div className="w-5/6 pt-20">Setting</div>
+          <div className="w-5/6 pt-20">
+            
+          </div>
         </div>
       </div>
     );
