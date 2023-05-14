@@ -21,7 +21,7 @@ export default class Profile extends Component {
           <Menu />
           {/* Content Display Div */}
           <div className="w-5/6 pt-20 px-5 py-6 flex justify-center h-screen">
-            <div className="bg-white rounded-lg w-full shadow-sm overflow-hidden relative">
+            <div className="scroll bg-white rounded-lg w-full shadow-sm overflow-scroll relative">
               {/* Cover Image */}
               <div className="w-full h-44 items-center flex justify-center border">
                 <img src={cover} alt="Cover Image" className="w-full h-full" />
