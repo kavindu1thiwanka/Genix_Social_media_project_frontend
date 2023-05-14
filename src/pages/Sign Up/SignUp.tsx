@@ -15,14 +15,15 @@ import AlternateEmailRoundedIcon from "@mui/icons-material/AlternateEmailRounded
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import PhoneRoundedIcon from "@mui/icons-material/PhoneRounded";
 import LockRoundedIcon from "@mui/icons-material/LockRounded";
-import { LocalizationProvider } from "@mui/x-date-pickers";
 
 function SignUp() {
+  
   const [value, setValue] = React.useState("male");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue((event.target as HTMLInputElement).value);
   };
+
   return (
     <div className="w-full min-h-screen flex items-center justify-center py-7">
       <div className="w-[50%] flex items-center justify-center flex-col px-28">
