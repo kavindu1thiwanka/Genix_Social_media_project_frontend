@@ -6,8 +6,28 @@ import Post from "../../components/Post";
 import "./home.css";
 import PhotoSizeSelectActualOutlinedIcon from "@mui/icons-material/PhotoSizeSelectActualOutlined";
 import Friend_side from "../../components/Friend_side";
+import { useEffect, useState } from "react";
+import { PostDetails } from "../../types/PostDetails";
+import api from "../../axios";
 
 function Home() {
+  const [postList, setPostList] = useState<PostDetails[]>([]);
+
+  useEffect(() => {
+    retrieveAllPosts();
+  }, []);
+
+  const retrieveAllPosts = () => {
+    api
+      .get("post")
+      .then((res) => {
+        console.log(res);
+        setPostList(res.data.responseData);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div className="w-full min-h-screen bg-[#F8F8F8] overflow-hidden">
       <Header />
@@ -33,17 +53,28 @@ function Home() {
             </div>
             {/* Post */}
             <div className="w-[80%] space-y-4">
-              <Post />
-              <Post img="../../assets/img/acc.jpeg"/>
-              <Post />
-              <Post />
+              {postList.map((post) => (
+                <Post
+                  key={post.post_id}
+                  post_id={post.post_id}
+                  user_id={post.user_id}
+                  user_name={post.user_name}
+                  userImg={post.userImg}
+                  date={post.date}
+                  time={post.time}
+                  description={post.description}
+                  img={post.img}
+                  comment={post.comment}
+                />
+              ))}
             </div>
           </div>
           <div className="w-1/4 bg-white px-6 pt-6 shadow-sm">
             <p className="font-roboto font-extrabold text-[#0000009b] mb-3">
               FRIENDS
             </p>
-            <TextField className="mb-3"
+            <TextField
+              className="mb-3"
               fullWidth
               id="standard-bare"
               variant="outlined"
@@ -58,26 +89,8 @@ function Home() {
               }}
             />
             <div className="scroll h-screen space-y-1 items-center flex flex-col overflow-scroll mt-3">
-              <Friend_side/>
-              <Friend_side/>
-              <Friend_side/>
-              <Friend_side/>
-              <Friend_side/>
-              <Friend_side/>
-              <Friend_side/>
-              <Friend_side/>
-              <Friend_side/>
-              <Friend_side/>
-              <Friend_side/>
-              <Friend_side/>
-              <Friend_side/>
-              <Friend_side/>
-              <Friend_side/>
-              <Friend_side/>
-              <Friend_side/>
-              <Friend_side/>
-              <Friend_side/>
-              <Friend_side/>
+              <Friend_side />
+              <Friend_side />
             </div>
           </div>
         </div>

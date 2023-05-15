@@ -1,9 +1,10 @@
 export type PostDetails = {
   post_id: string;
   user_id: string;
-  user: string;
+  user_name: string;
   userImg: string;
-  date_time: string;
+  date: string;
+  time: string;
   description: string;
   img?: string;
   comment?: string[];
