@@ -9,8 +9,19 @@ import Friend_side from "../../components/Friend_side";
 import { useEffect, useState } from "react";
 import { PostDetails } from "../../types/PostDetails";
 import api from "../../axios";
+import PopUpPost from "../../components/Add_Post";
 
 function Home() {
+  //dp eka ganna ona
+  //user ge details ganna ona
+  //userge friends la tika ganna ona
+
+  const [isShown, setIsShown] = useState(false);
+
+  const handleAddPostPopUp = (event: any) => {
+    setIsShown((current) => !current);
+  };
+
   const [postList, setPostList] = useState<PostDetails[]>([]);
 
   useEffect(() => {
@@ -40,17 +51,18 @@ function Home() {
                 Post Something
               </p>
               <div className="bg-[#00000026] w-full h-[1px]"></div>
-              <div className="flex justify-between p-4">
+              <div onClick={handleAddPostPopUp} className="flex justify-between p-4 cursor-text">
                 <div>
                   <p className="text-[#9d9d9d4b] select-none cursor-text">
                     {"What’s on your mind?"}
                   </p>
                 </div>
                 <div>
-                  <PhotoSizeSelectActualOutlinedIcon className="text-[#9d9d9d4b]" />
+                  <PhotoSizeSelectActualOutlinedIcon className="text-[#9d9d9d4b] cursor-pointer" />
                 </div>
               </div>
             </div>
+            {isShown && <div className="w-[80%] space-y-4"><PopUpPost/></div>}
             {/* Post */}
             <div className="w-[80%] space-y-4">
               {postList.map((post) => (
@@ -67,6 +79,14 @@ function Home() {
                   comment={post.comment}
                 />
               ))}
+
+              <Post />
+              <Post />
+              <Post />
+              <Post />
+              <Post />
+              <Post />
+              <Post />
             </div>
           </div>
           <div className="w-1/4 bg-white px-6 pt-6 shadow-sm">

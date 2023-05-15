@@ -6,4 +6,5 @@ export type Users = {
   address: string;
   email: string;
   contactNumber: string;
+  user_img:string;
 };
