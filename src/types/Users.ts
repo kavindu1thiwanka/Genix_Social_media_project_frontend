@@ -5,5 +5,6 @@ export type Users = {
   address: string;
   email: string;
   contactNumber: string;
+  gender:string;
   user_img:string;
 };

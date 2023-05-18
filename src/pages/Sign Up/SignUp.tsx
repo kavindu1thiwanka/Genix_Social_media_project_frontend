@@ -9,19 +9,85 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Person2RoundedIcon from "@mui/icons-material/Person2Rounded";
 import AlternateEmailRoundedIcon from "@mui/icons-material/AlternateEmailRounded";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import PhoneRoundedIcon from "@mui/icons-material/PhoneRounded";
 import LockRoundedIcon from "@mui/icons-material/LockRounded";
+import api from "../../axios";
 
 function SignUp() {
-  
-  const [value, setValue] = React.useState("male");
+  const navigate = useNavigate ();
+
+  const [value, setValue] = React.useState("Male");
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [number, setNumber] = React.useState("");
+  const [address, setAddress] = React.useState("");
+  const [bday, setBday] = React.useState("");
+  const [pwd, setPwd] = React.useState("");
+  const [confirmPwd, setConfirmPwd] = React.useState("");
+
+  const nameHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName((event.target as HTMLInputElement).value);
+  };
+
+  const emailHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail((event.target as HTMLInputElement).value);
+  };
+
+  const numberHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setNumber((event.target as HTMLInputElement).value);
+  };
+
+  const addressHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setAddress((event.target as HTMLInputElement).value);
+  };
+
+  const bdayHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setBday((event.target as HTMLInputElement).value);
+  };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue((event.target as HTMLInputElement).value);
+  };
+
+  const pwdHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPwd((event.target as HTMLInputElement).value);
+  };
+
+  const confirmPwdHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setConfirmPwd((event.target as HTMLInputElement).value);
+  };
+
+  const addUser = () => {
+    if (pwd === confirmPwd) {
+      let newUser = {
+        user_name: name,
+        user_password: pwd,
+        birthDay: bday,
+        address: address,
+        email: email,
+        contactNumber: number,
+        gender: value,
+      };
+      api
+        .post("user", newUser)
+        .then((res) => {
+          console.log(res.data.responseData);
+          if (res.data.responseData) {
+            navigate("/");
+          } else {
+            alert("Check Input Details..!");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } else {
+      alert("Confirm Password Not Match..");
+    }
   };
 
   return (
@@ -47,6 +113,7 @@ function SignUp() {
             placeholder="Enter your email"
             fullWidth={true}
             focused={false}
+            onChange={nameHandler}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -72,6 +139,7 @@ function SignUp() {
                 placeholder="Enter your password"
                 fullWidth={true}
                 focused={false}
+                onChange={emailHandler}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -97,6 +165,7 @@ function SignUp() {
                 placeholder="Enter your password"
                 fullWidth={true}
                 focused={false}
+                onChange={numberHandler}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -122,6 +191,7 @@ function SignUp() {
             placeholder="Enter your password"
             fullWidth={true}
             focused={false}
+            onChange={addressHandler}
             InputProps={{
               startAdornment: (
                 <InputAdornment position="start">
@@ -147,6 +217,7 @@ function SignUp() {
                 placeholder="Enter your password"
                 fullWidth={true}
                 focused={false}
+                onChange={bdayHandler}
                 required
               />
             </div>
@@ -166,12 +237,12 @@ function SignUp() {
                   onChange={handleChange}
                 >
                   <FormControlLabel
-                    value="male"
+                    value="Male"
                     control={<Radio />}
                     label="Male"
                   />
                   <FormControlLabel
-                    value="female"
+                    value="Female"
                     control={<Radio />}
                     label="Female"
                   />
@@ -188,7 +259,6 @@ function SignUp() {
                 Password
               </label>
               <TextField
-                id="pwd"
                 className="TextField"
                 inputProps={{ style: { color: "#000000" } }}
                 type="password"
@@ -196,6 +266,7 @@ function SignUp() {
                 placeholder="Enter your password"
                 fullWidth={true}
                 focused={false}
+                onChange={pwdHandler}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -221,6 +292,7 @@ function SignUp() {
                 placeholder="Enter your password"
                 fullWidth={true}
                 focused={false}
+                onChange={confirmPwdHandler}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -232,12 +304,10 @@ function SignUp() {
               />
             </div>
           </div>
-          <Link to={"/"}>
-              <button className="w-full bg-accent-navy-200 text-white py-3 rounded bg-[#6B43C7] mt-5 font-signup text-xl font-bold">
-                Sign Up
-              </button>
-            </Link>
-          <p className="text-sm text-center">
+          <button type="button" onClick={addUser} className="w-full bg-accent-navy-200 text-white py-3 rounded bg-[#6B43C7] mt-5 font-signup text-xl font-bold">
+            Sign Up
+          </button>
+          <p className="text-xs text-center">
             By clicking Sign Up, you agree to our Terms, Privacy Policy and
             Cookies Policy. You may receive SMS notifications from us and can
             opt out at any time.

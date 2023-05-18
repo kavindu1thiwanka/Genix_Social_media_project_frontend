@@ -13,18 +13,17 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate ();
 
-  const emailInputHandler = (enteredText: any) => {
-    setEmail(enteredText.target.value);
+  const emailInputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail((event.target as HTMLInputElement).value);
   };
-  const passwordInputHandler = (enteredText: any) => {
-    setPassword(enteredText.target.value);
+  const passwordInputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword((event.target as HTMLInputElement).value);
   };
 
   const checkLogin = () => {
     api
       .get(`user/${email}&${password}`)
       .then((res) => {
-        console.log(res.data.responseData);
         if (res.data.responseData) {
           navigate("/home");
         } else {
