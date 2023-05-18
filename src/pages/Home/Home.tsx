@@ -65,7 +65,7 @@ function Home() {
             {isShown && <div className="w-[80%] space-y-4"><PopUpPost/></div>}
             {/* Post */}
             <div className="w-[80%] space-y-4">
-              {postList.map((post) => (
+              {/* {postList.map((post) => (
                 <Post
                   key={post.post_id}
                   post_id={post.post_id}
@@ -78,15 +78,7 @@ function Home() {
                   img={post.img}
                   comment={post.comment}
                 />
-              ))}
-
-              <Post />
-              <Post />
-              <Post />
-              <Post />
-              <Post />
-              <Post />
-              <Post />
+              ))} */}
             </div>
           </div>
           <div className="w-1/4 bg-white px-6 pt-6 shadow-sm">
