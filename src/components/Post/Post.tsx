@@ -1,19 +1,19 @@
-import { useEffect } from "react";
-import accImg from "../../assets/img/acc.jpeg";
+import { useEffect, useState } from "react";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ChatBubbleIcon from "@mui/icons-material/ChatBubble";
 import "./post.css";
 import api from "../../axios";
-import { AxiosResponse } from "axios";
-
+import { Users } from "../../types/Users";
 export default function Post(props: any) {
-
   let likesCount: any;
-  let commentCount: any;
+
+  const [name, setName] = useState<string>("");
+  const [img, setImg] = useState<string>("");
 
   useEffect(() => {
     retrieveLikesAndComments();
+    getUserDetails();
   }, []);
 
   const retrieveLikesAndComments = () => {
@@ -26,12 +26,20 @@ export default function Post(props: any) {
       .catch((error) => {
         console.log(error);
       });
+  };
 
+  const getUserDetails = () => {
     api
-      .get(`comment/${props.post_id}`)
+      .get(`user/${props.user_id}`)
       .then((res) => {
-        console.log(res);
-        commentCount = 0;
+        const arr = Object.values(res.data.responseData);
+        for (const [key, value] of Object.entries(res.data.responseData)) {
+          if (key == "name") {
+            setName(value as string);
+          } else if (key == "userImg") {
+            setImg(value as string);
+          }
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -42,14 +50,14 @@ export default function Post(props: any) {
     <div className="relative bg-white rounded-lg w-full shadow-sm p-5 space-y-2">
       <div className="flex flex-row items-center relative">
         <div className="border w-9 h-9 rounded-full flex items-center justify-center text-center mr-3 cursor-pointer">
-          <img src={props.userImg} alt="img" className="rounded-full" />
+          <img src={img} className="rounded-full" />
         </div>
         <div>
-          <p className="font-roboto font-bold text-sm cursor-pointer">
-            {props.user_name}
+          <p className="font-roboto font-bold text-sm cursor-pointer text-black">
+            {name}
           </p>
           <p className="font-roboto text-xs text-[#0000006d]">
-            {props.date} at {props.time}
+            {props.date_time}
           </p>
         </div>
         <div className="absolute right-0 cursor-pointer">
@@ -61,9 +69,11 @@ export default function Post(props: any) {
         <p className="mb-5">{props.description}</p>
       </div>
       {/* Image */}
-      <div>{/* <img src={postImg} alt="" className="w-full h-full"/> */}</div>
+      <div className="w-full h-full">
+      {props.img == "" || props.img == null ? "" :<img src={props.img} alt="" className="w-full h-full" />}
+      </div>
       {/* Like & Comment */}
-      <div className="absolute flex flex-row bottom-0 right-0 p-4 space-x-2">
+      <div className="flex items-center justify-end pt-2 space-x-2">
         <div className="flex flex-row space-x-1">
           <FavoriteIcon className="post_icons cursor-pointer" />
           <p className="text-xs">0 Likes</p>
@@ -76,4 +86,3 @@ export default function Post(props: any) {
     </div>
   );
 }
-

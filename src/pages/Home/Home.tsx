@@ -13,7 +13,6 @@ import PopUpPost from "../../components/Add_Post";
 import { userDetails } from "../Login/Login";
 
 export default function Home() {
-
   const [isShown, setIsShown] = useState(false);
 
   const handleAddPostPopUp = (event: any) => {
@@ -33,7 +32,6 @@ export default function Home() {
       .get(`friend/${userDetails.user_id}`)
       .then((res) => {
         setFriendList(res.data.responseData);
-        console.log(friendList);
       })
       .catch((error) => {
         console.log(error);
@@ -83,24 +81,20 @@ export default function Home() {
             )}
             {/* Post */}
             <div className="w-[80%] space-y-4">
-              {/* {postList.map((post) => (
+              {postList.map((post) => (
                 <Post
                   key={post.post_id}
                   post_id={post.post_id}
                   user_id={post.user_id}
-                  user_name={post.user_name}
-                  userImg={post.userImg}
-                  date={post.date}
-                  time={post.time}
+                  date_time={post.date_time}
                   description={post.description}
                   img={post.img}
-                  comment={post.comment}
                 />
-              ))} */}
+              ))}
             </div>
           </div>
           <div className="w-1/4 bg-white px-6 pt-6 shadow-sm">
-            <p className="font-roboto font-extrabold text-[#0000009b] mb-3">
+            <p className="font-roboto font-extrabold text-[#0000009b] mb-3 select-none">
               FRIENDS
             </p>
             <TextField
@@ -119,8 +113,14 @@ export default function Home() {
               }}
             />
             <div className="scroll h-screen space-y-1 items-center flex flex-col overflow-scroll mt-3">
-              <Friend_side />
-              <Friend_side />
+              {/* {friendList.map((friend) => (
+                friend.user_id !== userDetails.user_id && (
+                  <Friend_side 
+                    key={friend.user_id} 
+                    name={friend.user_name}
+                    userImg={friend.user_img}
+                  />
+              )))} */}
             </div>
           </div>
         </div>

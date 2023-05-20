@@ -1,4 +1,5 @@
 export type Users = {
+  user_id: string;
   user_name: string;
   user_password: string;
   birthDay: string;
@@ -6,5 +7,5 @@ export type Users = {
   email: string;
   contactNumber: string;
   gender:string;
-  user_img:string;
+  userImg?:string;
 };

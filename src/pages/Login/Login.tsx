@@ -37,6 +37,7 @@ export default function Login() {
             address: arr[4],
             conact: arr[5],
             gender: arr[6],
+            userImg: arr[7],
           };
           navigate("/home");
         } else {

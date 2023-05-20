@@ -1,5 +1,4 @@
 import React from "react";
-import accImg from "../../assets/img/acc.jpeg";
 import { Link, NavLink, useHref } from "react-router-dom";
 import WebOutlinedIcon from "@mui/icons-material/WebOutlined";
 import GroupRoundedIcon from "@mui/icons-material/GroupRounded";
@@ -9,6 +8,7 @@ import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import { userDetails } from "../../pages/Login/Login";
 
 function Menu() {
+  const picture = require(`../../assets/user profile photo/${userDetails.userImg}`);
   const activeLink = "text-[#6B43C7] rounded-xl";
   const normalLink = "cursor-pointer text-black";
   return (
@@ -16,12 +16,12 @@ function Menu() {
       <div className="rounded-xl border mx-5 py-3 px-3 flex flex-row space-x-4">
         <Link to={"/profile"}>
           <div className="border w-11 h-11 rounded-full flex items-center justify-center text-center cursor-pointer">
-            <img src={accImg} alt="img" className="rounded-full" />
+            <img src={picture} className="select-none rounded-full" />
           </div>
         </Link>
         <div>
           <Link to={"/profile"}>
-            <p className="font-roboto font-bold cursor-pointer">
+            <p className="select-none font-roboto font-bold cursor-pointer">
               {userDetails.name}
             </p>
           </Link>
@@ -30,7 +30,7 @@ function Menu() {
       </div>
 
       <div>
-        <nav className="flex flex-col space-y-9 ml-5 mt-8 font-roboto font-semibold text-md">
+        <nav className="flex flex-col space-y-9 ml-5 mt-8 font-roboto font-semibold text-md select-none">
           <NavLink
             to={"/home"}
             className={({ isActive }) => (isActive ? activeLink : normalLink)}
