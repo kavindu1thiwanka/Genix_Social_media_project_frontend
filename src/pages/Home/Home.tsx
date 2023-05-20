@@ -10,11 +10,9 @@ import { useEffect, useState } from "react";
 import { PostDetails } from "../../types/PostDetails";
 import api from "../../axios";
 import PopUpPost from "../../components/Add_Post";
+import { userDetails } from "../Login/Login";
 
-function Home() {
-  //dp eka ganna ona
-  //user ge details ganna ona
-  //userge friends la tika ganna ona
+export default function Home() {
 
   const [isShown, setIsShown] = useState(false);
 
@@ -23,16 +21,29 @@ function Home() {
   };
 
   const [postList, setPostList] = useState<PostDetails[]>([]);
+  const [friendList, setFriendList] = useState<[]>([]);
 
   useEffect(() => {
     retrieveAllPosts();
+    retrieveAllFriends();
   }, []);
+
+  const retrieveAllFriends = () => {
+    api
+      .get(`friend/${userDetails.user_id}`)
+      .then((res) => {
+        setFriendList(res.data.responseData);
+        console.log(friendList);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const retrieveAllPosts = () => {
     api
       .get("post")
       .then((res) => {
-        console.log(res);
         setPostList(res.data.responseData);
       })
       .catch((error) => {
@@ -51,7 +62,10 @@ function Home() {
                 Post Something
               </p>
               <div className="bg-[#00000026] w-full h-[1px]"></div>
-              <div onClick={handleAddPostPopUp} className="flex justify-between p-4 cursor-text">
+              <div
+                onClick={handleAddPostPopUp}
+                className="flex justify-between p-4 cursor-text"
+              >
                 <div>
                   <p className="text-[#9d9d9d4b] select-none cursor-text">
                     {"What’s on your mind?"}
@@ -62,7 +76,11 @@ function Home() {
                 </div>
               </div>
             </div>
-            {isShown && <div className="w-[80%] space-y-4"><PopUpPost/></div>}
+            {isShown && (
+              <div className="w-[80%] space-y-4">
+                <PopUpPost />
+              </div>
+            )}
             {/* Post */}
             <div className="w-[80%] space-y-4">
               {/* {postList.map((post) => (
@@ -110,5 +128,3 @@ function Home() {
     </div>
   );
 }
-
-export default Home;

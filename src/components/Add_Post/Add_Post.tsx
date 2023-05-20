@@ -1,6 +1,8 @@
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import { TextField } from "@mui/material";
-import './Add_Post.css'
+import './Add_Post.css';
+import PublicIcon from '@mui/icons-material/Public';
+import { userDetails } from "../../pages/Login/Login";
 
 export default function Add_Post(props: any) {
   return (
@@ -11,10 +13,11 @@ export default function Add_Post(props: any) {
         </div>
         <div>
           <p className="font-roboto font-bold text-sm cursor-pointer">
-            {/* {props.name} */} Kavindu Thiwanka
+            {userDetails.name}
           </p>
           <p className="font-roboto text-xs text-[#0000006d]">
-            {new Date().toLocaleString() + ""}
+            {/* {new Date().toLocaleString() + ""} */}
+            <PublicIcon fontSize="small" className="p-1"/>Public
           </p>
         </div>
         <div className="absolute right-0 cursor-pointer">

@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import "./login_page_style.css";
 import { Checkbox, TextField } from "@mui/material";
-import { Link, useNavigate   } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "./../../assets/logo/Genix Logo.png";
 import EastRoundedIcon from "@mui/icons-material/EastRounded";
 import { grey } from "@mui/material/colors";
+import jwt from "jwt-decode";
 import api from "../../axios";
 
+let userDetails: any;
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate ();
-
+  const navigate = useNavigate();
   const emailInputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail((event.target as HTMLInputElement).value);
   };
@@ -24,7 +25,19 @@ export default function Login() {
     api
       .get(`user/${email}&${password}`)
       .then((res) => {
-        if (res.data.responseData) {
+        const token = res.data.responseData;
+        if (token) {
+          const decoded = jwt(token) as Object;
+          const arr = Object.values(decoded);
+          userDetails = {
+            id: arr[0],
+            user_id: arr[1],
+            name: arr[2],
+            bday: arr[3],
+            address: arr[4],
+            conact: arr[5],
+            gender: arr[6],
+          };
           navigate("/home");
         } else {
           alert("Check Your Email or Password..!");
@@ -96,7 +109,8 @@ export default function Login() {
                 Show Password
               </label>
             </div>
-            <button type="button"
+            <button
+              type="button"
               onClick={checkLogin}
               className="w-full bg-accent-navy-200 text-white py-3 rounded bg-[#6B43C7] mb-3 font-signup text-xl font-bold"
             >
@@ -108,7 +122,10 @@ export default function Login() {
               <div className="h-[1px] bg-white w-28 opacity-25" />
             </div>
             <Link to={"/signup"}>
-              <button type="button" className="w-full bg-accent-navy-200 text-white py-3 rounded border border-[#6B43C7] mt-3">
+              <button
+                type="button"
+                className="w-full bg-accent-navy-200 text-white py-3 rounded border border-[#6B43C7] mt-3"
+              >
                 Create New Account
               </button>
             </Link>
@@ -118,3 +135,5 @@ export default function Login() {
     </div>
   );
 }
+
+export { userDetails };

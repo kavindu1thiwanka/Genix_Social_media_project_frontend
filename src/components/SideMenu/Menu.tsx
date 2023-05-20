@@ -6,11 +6,11 @@ import GroupRoundedIcon from "@mui/icons-material/GroupRounded";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import EventNoteRoundedIcon from "@mui/icons-material/EventNoteRounded";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
+import { userDetails } from "../../pages/Login/Login";
 
 function Menu() {
   const activeLink = "text-[#6B43C7] rounded-xl";
   const normalLink = "cursor-pointer text-black";
-
   return (
     <div className="shadow-sm h-screen pt-20 bg-white w-1/5">
       <div className="rounded-xl border mx-5 py-3 px-3 flex flex-row space-x-4">
@@ -22,10 +22,10 @@ function Menu() {
         <div>
           <Link to={"/profile"}>
             <p className="font-roboto font-bold cursor-pointer">
-              Kavindu Thiwanka
+              {userDetails.name}
             </p>
           </Link>
-          <p className="font-roboto text-sm text-[#0000006d]">@kavindu</p>
+          <p className="font-roboto text-sm text-[#0000006d]">{userDetails.user_id}</p>
         </div>
       </div>
 

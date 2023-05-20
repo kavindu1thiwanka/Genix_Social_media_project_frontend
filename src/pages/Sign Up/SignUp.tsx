@@ -16,9 +16,10 @@ import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import PhoneRoundedIcon from "@mui/icons-material/PhoneRounded";
 import LockRoundedIcon from "@mui/icons-material/LockRounded";
 import api from "../../axios";
+import {v4 as uuidv4} from 'uuid';
 
 function SignUp() {
-  const navigate = useNavigate ();
+  const navigate = useNavigate();
 
   const [value, setValue] = React.useState("Male");
   const [name, setName] = React.useState("");
@@ -63,7 +64,10 @@ function SignUp() {
 
   const addUser = () => {
     if (pwd === confirmPwd) {
+      const unique_id = uuidv4();
+      const small_id = unique_id.slice(0,8)
       let newUser = {
+        user_id: `@${small_id}`,
         user_name: name,
         user_password: pwd,
         birthDay: bday,
@@ -75,9 +79,21 @@ function SignUp() {
       api
         .post("user", newUser)
         .then((res) => {
-          console.log(res.data.responseData);
+          const detail = Object.values(res.data.responseData);
           if (res.data.responseData) {
-            navigate("/");
+            let friendList = {
+              user_id: detail[0],
+              friends_ids: [],
+              friendsCount: 0,
+            };
+            api
+              .post("friend", friendList)
+              .then((res) => {
+                navigate("/");
+              })
+              .catch((error) => {
+                console.log(error);
+              });
           } else {
             alert("Check Input Details..!");
           }
@@ -304,7 +320,11 @@ function SignUp() {
               />
             </div>
           </div>
-          <button type="button" onClick={addUser} className="w-full bg-accent-navy-200 text-white py-3 rounded bg-[#6B43C7] mt-5 font-signup text-xl font-bold">
+          <button
+            type="button"
+            onClick={addUser}
+            className="w-full bg-accent-navy-200 text-white py-3 rounded bg-[#6B43C7] mt-5 font-signup text-xl font-bold"
+          >
             Sign Up
           </button>
           <p className="text-xs text-center">

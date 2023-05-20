@@ -1,5 +1,7 @@
-import React from 'react'
+import { useEffect } from "react";
 import accImg from "../../assets/img/acc.jpeg";
+import { userDetails } from "../../pages/Login/Login";
+import api from "../../axios";
 
 export default function Friend_side() {
   return (
