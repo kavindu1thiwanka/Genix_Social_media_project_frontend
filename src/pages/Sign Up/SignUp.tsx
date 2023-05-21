@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./signUp-styles.css";
 import logo from "../../assets/logo/Genix.png";
 import {
@@ -16,7 +16,8 @@ import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import PhoneRoundedIcon from "@mui/icons-material/PhoneRounded";
 import LockRoundedIcon from "@mui/icons-material/LockRounded";
 import api from "../../axios";
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from "uuid";
+import ImageIcon from '@mui/icons-material/Image';
 
 function SignUp() {
   const navigate = useNavigate();
@@ -62,10 +63,24 @@ function SignUp() {
     setConfirmPwd((event.target as HTMLInputElement).value);
   };
 
+  const [image, setImage] = useState("");
+
+  const convertToBase64 = (e: any) => {
+    console.log(e);
+    var reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = () => {
+      setImage(reader.result as string);
+    };
+    reader.onerror = (error) => {
+      console.log("Error : ", error);
+    };
+  };
+
   const addUser = () => {
     if (pwd === confirmPwd) {
       const unique_id = uuidv4();
-      const small_id = unique_id.slice(0,8)
+      const small_id = unique_id.slice(0, 8);
       let newUser = {
         user_id: `@${small_id}`,
         user_name: name,
@@ -75,6 +90,7 @@ function SignUp() {
         email: email,
         contactNumber: number,
         gender: value,
+        userImg: image,
       };
       api
         .post("user", newUser)
@@ -217,7 +233,7 @@ function SignUp() {
             }}
             required
           />
-          <div className="flex flex-row space-x-3">
+          <div className="flex flex-row space-x-5">
             <div className="w-1/2 flex flex-col space-y-2">
               <label
                 htmlFor=""
@@ -318,6 +334,22 @@ function SignUp() {
                 }}
                 required
               />
+            </div>
+          </div>
+          <div className="w-full flex flex-row space-x-0 py-4">
+            <div className="flex flex-col space-y-4">
+              <label
+                htmlFor="pwd"
+                className="label-signup font-login-sub font-extrabold"
+              >
+                Progile Picture
+              </label>
+              <input onChange={convertToBase64} type="file"></input>
+            </div>
+            <div className="">
+              <div className="border border-[#9898986a] w-20 h-20 flex items-center justify-center text-center cursor-pointer">
+              {image == "" || image == null ? <ImageIcon fontSize="large" className="text-[#9898986a]"/> :<img src={image} className="w-full h-full" />}
+              </div>
             </div>
           </div>
           <button

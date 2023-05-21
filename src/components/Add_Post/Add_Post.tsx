@@ -8,7 +8,6 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 export default function Add_Post(props: any) {
-  const picture = require(`../../assets/user profile photo/${userDetails.userImg}`);
   const [description, setDescription] = useState("");
   const descriptionInputHandler = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -28,6 +27,7 @@ export default function Add_Post(props: any) {
       console.log("Error : ", error);
     };
   };
+
   const createPost = () => {
     const unique_id = uuidv4();
     const small_id = unique_id.slice(0, 8);
@@ -39,7 +39,7 @@ export default function Add_Post(props: any) {
       description: description,
       img: image,
     };
-
+    console.log(newPost)
     api
       .post("post", newPost)
       .then((res) => {
@@ -47,6 +47,7 @@ export default function Add_Post(props: any) {
       })
       .catch((error) => {
         console.log(error);
+        alert("Use")
       });
   };
 
@@ -54,7 +55,7 @@ export default function Add_Post(props: any) {
     <div className="relative bg-white rounded-lg w-full shadow-sm p-5 space-y-2">
       <div className="flex flex-row items-center relative">
         <div className="border w-9 h-9 rounded-full flex items-center justify-center text-center mr-3 cursor-pointer">
-          <img src={picture} alt="." className="rounded-full" />
+          <img src={userDetails.userImg} alt="." className="rounded-full" />
         </div>
         <div>
           <p className="font-roboto font-bold text-sm cursor-pointer">
@@ -91,15 +92,15 @@ export default function Add_Post(props: any) {
       </div>
       {/* Image */}
       <div className="w-full h-72 flex justify-center items-center border rounded-md p-2 space-y-2 flex-col">
-        <div className="w-full h-[90%] rounded-md flex justify-center items-center">
-          {image == "" || image == null ? <ControlPointIcon fontSize="large" className="text-[#9898986a]"/> :<img src={image} className="w-full h-full" />}
+        <div className="border w-full h-[90%] rounded-md flex justify-center items-center">
+          {image == "" || image == null ? <ControlPointIcon fontSize="large" className="text-[#9898986a]"/> :<img src={image} className="h-full" />}
         </div>
         <div className="w-full h-[10] ">
           <input onChange={convertToBase64} type="file"></input>
         </div>
       </div>
       <div className="flex items-center justify-end">
-        <button
+        <button type="button"
           onClick={createPost}
           className="w-[15%] text-white py-2 rounded hover:bg-[#7048ce] bg-[#6B43C7] font-signup text-base font-bold mt-3"
         >

@@ -14,7 +14,6 @@ import { userDetails } from "../../pages/Login/Login";
 
 export default class Profile extends Component {
   render() {
-    const picture = require(`../../assets/user profile photo/${userDetails.userImg}`);
     return (
       <div className="w-full min-h-screen bg-[#F8F8F8] overflow-hidden">
         <Header />
@@ -31,7 +30,7 @@ export default class Profile extends Component {
               {/* Profile Photo */}
               <div className="mb-5">
                 <div className="z-20 absolute border w-36 h-36 rounded-full flex items-center justify-center text-center cursor-pointer top-[8.4rem] ml-12">
-                  <img src={picture} alt="img" className="rounded-full" />
+                  <img src={userDetails.userImg} alt="img" className="rounded-full" />
                 </div>
                 <div className="ml-52 mt-2 flex flex-row justify-between pr-5">
                   <div className="w-1/3">
