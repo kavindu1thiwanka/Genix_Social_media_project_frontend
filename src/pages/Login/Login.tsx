@@ -38,6 +38,10 @@ export default function Login() {
             conact: arr[5],
             gender: arr[6],
             userImg: arr[7],
+            email: arr[8],
+            description: arr[9],
+            relation: arr[10],
+            education: arr[11]
           };
           navigate("/home");
         } else {

@@ -15,7 +15,7 @@ function Menu() {
       <div className="rounded-xl border mx-5 py-3 px-3 flex flex-row space-x-4">
         <Link to={"/profile"}>
           <div className="border w-11 h-11 rounded-full flex items-center justify-center text-center cursor-pointer">
-            <img src={userDetails.userImg} className="select-none rounded-full" />
+            <img src={userDetails.userImg} className="select-none rounded-full w-11 h-11" />
           </div>
         </Link>
         <div>

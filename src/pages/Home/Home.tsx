@@ -11,6 +11,10 @@ import { PostDetails } from "../../types/PostDetails";
 import api from "../../axios";
 import PopUpPost from "../../components/Add_Post";
 import { userDetails } from "../Login/Login";
+import PeopleIcon from '@mui/icons-material/People';
+import { FriendList } from "../../types/FriendList";
+
+let friendsList: FriendList[] = [];
 
 export default function Home() {
   const [isShown, setIsShown] = useState(false);
@@ -20,7 +24,7 @@ export default function Home() {
   };
 
   const [postList, setPostList] = useState<PostDetails[]>([]);
-  const [friendList, setFriendList] = useState<[]>([]);
+  const [friendList, setFriendList] = useState<FriendList[]>([]);
 
   useEffect(() => {
     retrieveAllPosts();
@@ -32,6 +36,7 @@ export default function Home() {
       .get(`friend/${userDetails.user_id}`)
       .then((res) => {
         setFriendList(res.data.responseData);
+        friendsList = res.data.responseData;
       })
       .catch((error) => {
         console.log(error);
@@ -48,8 +53,25 @@ export default function Home() {
         console.log(error);
       });
   };
+
+  const shufflePostList = (array: PostDetails[]) => {
+    let currentIndex = array.length;
+    let temporaryValue, randomIndex;
+
+    while (currentIndex !== 0) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  };
+
   return (
-    <div className="w-full min-h-screen bg-[#F8F8F8] overflow-hidden">
+    <div className="w-full min-h-screen bg-[#e6e6e6a4] overflow-hidden">
       <Header />
       <div className="w-full h-screen flex flex-row">
         <Menu />
@@ -80,8 +102,8 @@ export default function Home() {
               </div>
             )}
             {/* Post */}
-            <div className="w-[80%] space-y-4">
-              {postList.map((post) => (
+            <div className="scrollSection w-[80%] space-y-4">
+             {shufflePostList(postList).map((post) => (
                 <Post
                   key={post.post_id}
                   post_id={post.post_id}
@@ -113,14 +135,15 @@ export default function Home() {
               }}
             />
             <div className="scroll h-screen space-y-1 items-center flex flex-col overflow-scroll mt-3">
-              {/* {friendList.map((friend) => (
-                friend.user_id !== userDetails.user_id && (
-                  <Friend_side 
-                    key={friend.user_id} 
-                    name={friend.user_name}
-                    userImg={friend.user_img}
-                  />
-              )))} */}
+              {
+                friendList.length === 0 ?  (<div className="select-none flex flex-col justify-center items-center text-[#9d9d9d6a] mt-16"><PeopleIcon/><p className="">Add Friends to Show Here</p></div> ):(
+                  
+                  friendList.map((friend) => (
+                    friend !== userDetails.user_id && (
+                      <Friend_side key={friend} user_id={friend} />
+                    )
+                  ))
+                )}
             </div>
           </div>
         </div>
@@ -128,3 +151,5 @@ export default function Home() {
     </div>
   );
 }
+
+export { friendsList };

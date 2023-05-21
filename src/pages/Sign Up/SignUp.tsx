@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./signUp-styles.css";
 import logo from "../../assets/logo/Genix.png";
 import {
@@ -66,7 +66,6 @@ function SignUp() {
   const [image, setImage] = useState("");
 
   const convertToBase64 = (e: any) => {
-    console.log(e);
     var reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
     reader.onload = () => {
@@ -116,6 +115,7 @@ function SignUp() {
         })
         .catch((error) => {
           console.log(error);
+          alert("Upload File Size Limit to 60kb")
         });
     } else {
       alert("Confirm Password Not Match..");
@@ -344,11 +344,11 @@ function SignUp() {
               >
                 Progile Picture
               </label>
-              <input onChange={convertToBase64} type="file"></input>
+              <input accept="image/*" onChange={convertToBase64} type="file"></input>
             </div>
             <div className="">
               <div className="border border-[#9898986a] w-20 h-20 flex items-center justify-center text-center cursor-pointer">
-              {image == "" || image == null ? <ImageIcon fontSize="large" className="text-[#9898986a]"/> :<img src={image} className="w-full h-full" />}
+              {image === "" || image === null ? <ImageIcon fontSize="large" className="text-[#9898986a]"/> :<img src={image} className="w-full h-full" />}
               </div>
             </div>
           </div>

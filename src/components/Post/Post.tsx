@@ -12,7 +12,7 @@ export default function Post(props: any) {
   const [img, setImg] = useState<string>("");
 
   useEffect(() => {
-    retrieveLikesAndComments();
+    // retrieveLikesAndComments();
     getUserDetails();
   }, []);
 
@@ -50,7 +50,7 @@ export default function Post(props: any) {
     <div className="relative bg-white rounded-lg w-full shadow-sm p-5 space-y-2">
       <div className="flex flex-row items-center relative">
         <div className="border w-9 h-9 rounded-full flex items-center justify-center text-center mr-3 cursor-pointer">
-          <img src={img} className="rounded-full" />
+          <img src={img} className="rounded-full w-9 h-9" />
         </div>
         <div>
           <p className="font-roboto font-bold text-sm cursor-pointer text-black">

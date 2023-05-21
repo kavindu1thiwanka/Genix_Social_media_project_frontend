@@ -8,4 +8,7 @@ export type Users = {
   contactNumber: string;
   gender:string;
   userImg?:string;
+  description?:string;
+  relation?:string;
+  education?:string;
 };

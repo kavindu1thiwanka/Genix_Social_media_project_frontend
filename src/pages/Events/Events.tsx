@@ -4,7 +4,7 @@ import Menu from "../../components/SideMenu";
 
 function Event() {
   return (
-    <div className="w-full min-h-screen bg-[#F8F8F8] overflow-hidden">
+    <div className="w-full min-h-screen bg-[#e6e6e6a4] overflow-hidden">
       <Header />
       <div className="w-full flex flex-row">
         <Menu />

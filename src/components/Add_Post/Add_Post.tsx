@@ -47,7 +47,7 @@ export default function Add_Post(props: any) {
       })
       .catch((error) => {
         console.log(error);
-        alert("Use")
+        alert("Upload File Size Limit to 60kb")
       });
   };
 
@@ -55,7 +55,7 @@ export default function Add_Post(props: any) {
     <div className="relative bg-white rounded-lg w-full shadow-sm p-5 space-y-2">
       <div className="flex flex-row items-center relative">
         <div className="border w-9 h-9 rounded-full flex items-center justify-center text-center mr-3 cursor-pointer">
-          <img src={userDetails.userImg} alt="." className="rounded-full" />
+          <img src={userDetails.userImg} alt="." className="rounded-full w-9 h-9" />
         </div>
         <div>
           <p className="font-roboto font-bold text-sm cursor-pointer">
@@ -96,7 +96,7 @@ export default function Add_Post(props: any) {
           {image == "" || image == null ? <ControlPointIcon fontSize="large" className="text-[#9898986a]"/> :<img src={image} className="h-full" />}
         </div>
         <div className="w-full h-[10] ">
-          <input onChange={convertToBase64} type="file"></input>
+          <input accept="image/*" onChange={convertToBase64} type="file"></input>
         </div>
       </div>
       <div className="flex items-center justify-end">

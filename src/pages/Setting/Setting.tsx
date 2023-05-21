@@ -14,6 +14,9 @@ import AlternateEmailRoundedIcon from "@mui/icons-material/AlternateEmailRounded
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import PhoneRoundedIcon from "@mui/icons-material/PhoneRounded";
 import LockRoundedIcon from "@mui/icons-material/LockRounded";
+import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded";
+import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
+import SubjectIcon from '@mui/icons-material/Subject';
 
 export default function Setting() {
   const [value, setValue] = React.useState("male");
@@ -24,7 +27,7 @@ export default function Setting() {
 
   return (
     <>
-      <div className="w-full min-h-screen bg-[#F8F8F8] overflow-hidden">
+      <div className="w-full min-h-screen bg-[#e6e6e6a4] overflow-hidden">
         <Header />
         <div className="w-full flex flex-row">
           <Menu />
@@ -55,6 +58,29 @@ export default function Setting() {
                     startAdornment: (
                       <InputAdornment position="start">
                         <Person2RoundedIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                  required
+                />
+                <label
+                  htmlFor="description"
+                  className="label-signup font-login-sub font-extrabold "
+                >
+                  Description
+                </label>
+                <TextField
+                  className="TextField"
+                  inputProps={{ style: { color: "#000000" } }}
+                  type="text"
+                  variant="outlined"
+                  placeholder="Enter your email"
+                  fullWidth={true}
+                  focused={false}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SubjectIcon />
                       </InputAdornment>
                     ),
                   }}
@@ -124,6 +150,52 @@ export default function Setting() {
                     startAdornment: (
                       <InputAdornment position="start">
                         <PhoneRoundedIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                  required
+                />
+                <label
+                  htmlFor="status"
+                  className="label-signup font-login-sub font-extrabold"
+                >
+                  Status
+                </label>
+                <TextField
+                  className="TextField"
+                  inputProps={{ style: { color: "#000000" } }}
+                  type="text"
+                  variant="outlined"
+                  placeholder="Enter your password"
+                  fullWidth={true}
+                  focused={false}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <FavoriteRoundedIcon />
+                      </InputAdornment>
+                    ),
+                  }}
+                  required
+                />
+                <label
+                  htmlFor="education"
+                  className="label-signup font-login-sub font-extrabold"
+                >
+                  Education
+                </label>
+                <TextField
+                  className="TextField"
+                  inputProps={{ style: { color: "#000000" } }}
+                  type="text"
+                  variant="outlined"
+                  placeholder="Enter your password"
+                  fullWidth={true}
+                  focused={false}
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <SchoolRoundedIcon />
                       </InputAdornment>
                     ),
                   }}
